@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'hotlines.dart';
+import 'countyhealth.dart';
 
 void main() {
   runApp(MentalHealthApp());
@@ -14,6 +16,12 @@ class MentalHealthApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: DashboardScreen(),
+      routes: {
+        '/page1': (context) => DashboardScreen(),
+        '/page2': (context) => HotlineScreen(),
+        '/page3': (context) => CountyScreen(),
+        '/page4': (context) => Placeholder(),
+
     );
   }
 }
@@ -96,6 +104,45 @@ class DashboardScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+
+
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Page 1',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Page 2',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: 'Page 3',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            label: 'Page 4',
+          ),
+        ],
+        type: BottomNavigationBarType.fixed,
+        onTap: (int index) {
+          switch (index) {
+            case 0:
+              Navigator.pushNamed(context, '/page1');
+              break;
+            case 1:
+              Navigator.pushNamed(context, '/page2');
+              break;
+            case 2:
+              Navigator.pushNamed(context, '/page3');
+              break;
+            case 3:
+              Navigator.pushNamed(context, '/page4');
+              break;
+          }
+        },
       ),
     );
   }
