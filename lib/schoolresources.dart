@@ -13,7 +13,7 @@ class SchoolResourcesPage extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                // TODO: Navigate to the newspaper page
+                //TODO
               },
               child: Text(
                 'Newspaper',
@@ -23,7 +23,7 @@ class SchoolResourcesPage extends StatelessWidget {
             SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
-                // TODO: Navigate to the event calendar page
+                //TODO
               },
               child: Text(
                 'Event Calendar',
@@ -33,7 +33,7 @@ class SchoolResourcesPage extends StatelessWidget {
             SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
-                // TODO: Navigate to the office hours page
+                //TODO
               },
               child: Text(
                 'Office Hours',

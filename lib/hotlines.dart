@@ -5,7 +5,6 @@ class HotlineScreen extends StatelessWidget {
     {'name': 'Emergency Services', 'number': '911'},
     {'name': 'Suicide Prevention', 'number': '1-800-273-8255'},
     {'name': 'Substance Abuse Helpline', 'number': '1-800-662-4357'},
-    // Add more hotline numbers and names as needed
   ];
 
   @override
@@ -30,14 +29,6 @@ class HotlineScreen extends StatelessWidget {
   }
 
   void _callHotline(BuildContext context, String number) {
-    // Implement the functionality to call the hotline number here
-    // For example, you can use URL launcher to make the call
-    // Make sure to import the package: url_launcher/url_launcher.dart
-    // and handle platform-specific behavior for making phone calls
-    // Here's an example using url_launcher:
-    // launch('tel:$number');
-    // Note: Make sure to add the necessary permissions in AndroidManifest.xml and Info.plist
-    // to allow making phone calls.
-    // Also handle exceptions and errors accordingly.
+   //todo
   }
 }

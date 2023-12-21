@@ -33,7 +33,7 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Mental Health Dashboard'),
+        title: Text('Dashboard'),
       ),
       body: Padding(
         padding: EdgeInsets.all(20.0),
@@ -62,9 +62,6 @@ class DashboardScreen extends StatelessWidget {
                         divisions: 5,
                         label: 'Feeling',
                         value: 50,
-                        onChanged: (double value) {
-                          // Implement functionality when the slider value changes
-                        },
                       ),
                       SizedBox(width: 20),
                       Icon(Icons.sentiment_satisfied),
@@ -84,9 +81,7 @@ class DashboardScreen extends StatelessWidget {
                       style: TextStyle(fontSize: 18.0),
                     ),
                   ),
-                  // TODO: Implement ToDo list widget
-                  // You can use ListView.builder for dynamic list items
-                ],
+
               ),
             ),
             SizedBox(height: 20),
@@ -100,8 +95,7 @@ class DashboardScreen extends StatelessWidget {
                       style: TextStyle(fontSize: 18.0),
                     ),
                   ),
-                  // TODO: Implement recent announcements widget
-                  // You can use ListView.builder for dynamic announcements
+
                 ],
               ),
             ),

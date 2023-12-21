@@ -15,39 +15,38 @@ class MentalHealthScreen extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                // Navigate to a page or website about mindfulness exercises for kids
+                //todo
               },
               child: Text('Mindfulness Exercises'),
             ),
             SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
-                // Navigate to a page or website with breathing exercises for kids
+                //todo
               },
               child: Text('Breathing Exercises'),
             ),
             SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
-                // Navigate to a page or website explaining emotions and how to manage them
+                //todo
               },
               child: Text('Understanding Emotions'),
             ),
             SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
-                // Navigate to a page or website providing art therapy resources for kids
+                //todo
               },
               child: Text('Art Therapy'),
             ),
             SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
-                // Navigate to a page or website with resources for dealing with stress
+                //todo
               },
               child: Text('Stress Management'),
             ),
-            // Add more buttons or resources as needed
           ],
         ),
       ),
