@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'hotlines.dart';
 import 'countyhealth.dart';
+import 'schoolresources.dart';
+import 'mentalhealth.dart';
 
 void main() {
   runApp(MentalHealthApp());
@@ -18,10 +20,11 @@ class MentalHealthApp extends StatelessWidget {
       home: DashboardScreen(),
       routes: {
         '/page1': (context) => DashboardScreen(),
-        '/page2': (context) => HotlineScreen(),
+        '/page2': (context) => MentalHealthScreen(),
         '/page3': (context) => CountyScreen(),
-        '/page4': (context) => Placeholder(),
-
+        '/page4': (context) => SchoolResourcesPage(),
+        '/page5': (context) => HotlineScreen(),
+      }
     );
   }
 }
@@ -125,6 +128,10 @@ class DashboardScreen extends StatelessWidget {
             icon: Icon(Icons.book),
             label: 'Page 4',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.star),
+            label: 'Page 5',
+          ),
         ],
         type: BottomNavigationBarType.fixed,
         onTap: (int index) {
@@ -141,10 +148,12 @@ class DashboardScreen extends StatelessWidget {
             case 3:
               Navigator.pushNamed(context, '/page4');
               break;
+            case 4:
+              Navigator.pushNamed(context, '/page5');
+              break;
           }
         },
       ),
     );
   }
 }
-
