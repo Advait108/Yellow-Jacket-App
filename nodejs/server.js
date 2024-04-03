@@ -7,29 +7,39 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Initialize userCredentials with an empty passwordHash
-let userCredentials = {
-    email: "advait.alluri@gmail.com",
-    passwordHash: "" // This will be set by the setupUser function
-};
 
-// Function to hash a password and update userCredentials
-async function setupUser(email, password) {
-    const salt = await bcrypt.genSalt(10);
-    userCredentials.passwordHash = await bcrypt.hash(password, salt);
-    console.log("User setup complete."); // Optional: Remove this line in production
+let users = [
+    { email: "advait.alluri@gmail.com", password: "123", passwordHash: "" },
+    { email: "user2@example.com", password: "abc", passwordHash: "" },
+    { email: "user3@example.com", password: "xyz", passwordHash: "" }
+];
+
+// Function to hash passwords and update users array with passwordHashes
+async function setupUsers() {
+    for (let user of users) {
+        const salt = await bcrypt.genSalt(10);
+        user.passwordHash = await bcrypt.hash(user.password, salt);
+        // Clear plaintext password after hashing for security
+        delete user.password;
+    }
+    console.log("Users setup complete."); // Optional: Log for confirmation, remove in production
 }
 
-// Call setupUser function for initial setup
-setupUser(userCredentials.email, "123");
+// Call setupUsers function for initial setup
+setupUsers();
 
 app.use(express.json());
 app.use(cors());
 
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
-    if (email === userCredentials.email && await bcrypt.compare(password, userCredentials.passwordHash)) {
-        const token = jwt.sign({ email: userCredentials.email }, process.env.JWT_SECRET, { expiresIn: '24h' });
+
+    // Find user by email
+    const user = users.find(u => u.email === email);
+
+    // Check if user exists and password is correct
+    if (user && await bcrypt.compare(password, user.passwordHash)) {
+        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '24h' });
         res.json({ token });
     } else {
         res.status(401).send({ message: "Invalid credentials" });
