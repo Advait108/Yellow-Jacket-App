@@ -1,107 +1,67 @@
 import 'package:flutter/material.dart';
 
+void main() {
+  runApp(MentalHealthScreen());
+}
+
 class MentalHealthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primaryColor: Colors.yellow, // Set primary color to yellow
-        scaffoldBackgroundColor: Colors.yellow[100],
-        // Set scaffold background color to a lighter shade of yellow
-        // You can customize more theme properties as per your requirement
+        primaryColor: Colors.yellow, // Primary color set to yellow
+        scaffoldBackgroundColor: Colors.yellow[100], // Lighter shade of yellow for the background
+        textTheme: TextTheme(
+          button: TextStyle(color: Colors.yellow[700]), // Custom text color for buttons
+        ),
+        buttonTheme: ButtonThemeData(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)), // Rounded corners for buttons
+        ),
       ),
       home: Scaffold(
         appBar: AppBar(
           title: Text('Mental Health Resources'),
+          backgroundColor: Colors.black, // Black AppBar for contrast
         ),
         body: Padding(
-          padding: EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(40.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  //todo
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black, // Button background color
-                  foregroundColor: Colors.yellow[700], // Button text color
-                ),
-                child: Text(
-                  'Journaling',
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-
+              _buildActionButton(context, 'Journaling', Icons.book),
               SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: () {
-                  //todo
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black, // Button background color
-                  foregroundColor: Colors.yellow[700], // Button text color
-                ),
-                child: Text(
-                  'Exercises',
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-
+              _buildActionButton(context, 'Exercises', Icons.fitness_center),
               SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: () {
-                  //todo
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black, // Button background color
-                  foregroundColor: Colors.yellow[700], // Button text color
-                ),
-                child: Text(
-                  '...',
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-
+              _buildActionButton(context, '...', Icons.help_outline),
               SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: () {
-                  //todo
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black, // Button background color
-                  foregroundColor: Colors.yellow[700], // Button text color
-                ),
-                child: Text(
-                  'idk',
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-
+              _buildActionButton(context, 'idk', Icons.question_answer),
               SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: () {
-                  //todo
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black, // Button background color
-                  foregroundColor: Colors.yellow[700], // Button text color
-                ),
-                child: Text(
-                  'Stress Management',
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-
+              _buildActionButton(context, 'Stress Management', Icons.mood),
             ],
           ),
         ),
       ),
     );
   }
-}
 
-void main() {
-  runApp(MentalHealthScreen());
+  Widget _buildActionButton(BuildContext context, String title, IconData icon) {
+    return ElevatedButton.icon(
+      icon: Icon(icon, color: Colors.yellow[700]), // Icon color
+      label: Text(
+        title,
+        style: TextStyle(fontSize: 16),
+      ),
+      onPressed: () {
+        // Todo: Implement button functionality
+      },
+      style: ElevatedButton.styleFrom(
+        primary: Colors.black54, // Button background color
+        onPrimary: Colors.yellow[700], // Button text color
+        padding: EdgeInsets.symmetric(vertical: 12.0),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)), // Rounded corners
+        elevation: 5, // Shadow effect
+      ),
+    );
+  }
 }
