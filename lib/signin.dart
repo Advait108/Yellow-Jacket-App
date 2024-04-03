@@ -36,7 +36,9 @@ class _SignInPageState extends State<SignInPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sign In'),
+        backgroundColor: Colors.yellow[700], // Yellow color for app bar
       ),
+      backgroundColor: Colors.yellow[100], // Light yellow background
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -48,6 +50,8 @@ class _SignInPageState extends State<SignInPage> {
               decoration: InputDecoration(
                 labelText: 'Email',
                 border: OutlineInputBorder(),
+                filled: true,
+                fillColor: Colors.white, // White text field background
               ),
             ),
             const SizedBox(height: 12.0),
@@ -56,6 +60,8 @@ class _SignInPageState extends State<SignInPage> {
               decoration: InputDecoration(
                 labelText: 'Password',
                 border: OutlineInputBorder(),
+                filled: true,
+                fillColor: Colors.white, // White text field background
               ),
               obscureText: true,
             ),
@@ -63,6 +69,10 @@ class _SignInPageState extends State<SignInPage> {
             ElevatedButton(
               onPressed: _signIn,
               child: const Text('Sign In'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.black, // Black button color
+                onPrimary: Colors.yellow[700], // Yellow text color
+              ),
             ),
           ],
         ),

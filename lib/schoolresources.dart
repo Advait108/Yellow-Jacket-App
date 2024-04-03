@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart'; // Import the url_launcher package
+
+const _url = "https://www.bifyellowpages.org/";
 
 class SchoolResourcesPage extends StatelessWidget {
   @override
@@ -13,7 +16,7 @@ class SchoolResourcesPage extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                //TODO
+                _launchURL(); // Call function to launch website
               },
               child: Text(
                 'Newspaper',
@@ -45,4 +48,7 @@ class SchoolResourcesPage extends StatelessWidget {
       ),
     );
   }
-}
+
+  // Function to launch newspaper website
+  void _launchURL() async =>
+      await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';
