@@ -42,6 +42,8 @@ class HotlineScreen extends StatelessWidget {
                   color: Colors.yellow[800], // Set text color to yellow
                 ),
               ),
+
+
               subtitle: Text(
                 hotlines[index]['number'] ?? '',
                 style: TextStyle(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'hotlines.dart';
-import 'countyhealth.dart';
+import 'settings.dart';
 import 'schoolresources.dart';
 import 'mentalhealth.dart';
 
@@ -33,9 +33,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   static List<Widget> _widgetOptions = <Widget>[
     DashboardPage(),
     MentalHealthScreen(),
-    CountyScreen(),
     SchoolResourcesPage(),
     HotlineScreen(),
+    SettingsScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -59,9 +59,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Health'),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'Undecided'),
           BottomNavigationBarItem(icon: Icon(Icons.book), label: 'BASIS'),
           BottomNavigationBarItem(icon: Icon(Icons.phone), label: 'Hotlines'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
         ],
         currentIndex: _selectedIndex,
         type: BottomNavigationBarType.fixed,
@@ -81,6 +81,7 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   final TextEditingController _todoController = TextEditingController();
   List<String> _todos = [];
+  Set<int> _completedTasks = Set();
   String _announcement = "No new announcements";
   double _sliderValue = 50;
 
@@ -91,6 +92,16 @@ class _DashboardPageState extends State<DashboardPage> {
         _todoController.clear();
       });
     }
+  }
+
+  void _toggleCompletion(int index) {
+    setState(() {
+      if (_completedTasks.contains(index)) {
+        _completedTasks.remove(index);
+      } else {
+        _completedTasks.add(index);
+      }
+    });
   }
 
   void _showDialog() {
@@ -188,7 +199,17 @@ class _DashboardPageState extends State<DashboardPage> {
                       ),
                     ),
                     SizedBox(height: 20),
-                    ..._todos.map((todo) => ListTile(title: Text(todo, style: TextStyle(color: Colors.white)))).toList(),
+                    ..._todos.asMap().entries.map((entry) {
+                      int idx = entry.key;
+                      String todo = entry.value;
+                      return ListTile(
+                        title: Text(todo, style: TextStyle(
+                          color: Colors.white,
+                          decoration: _completedTasks.contains(idx) ? TextDecoration.lineThrough : TextDecoration.none,
+                        )),
+                        onTap: () => _toggleCompletion(idx),
+                      );
+                    }).toList(),
                   ],
                 ),
               ),
