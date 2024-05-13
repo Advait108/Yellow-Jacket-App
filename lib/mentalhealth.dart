@@ -22,6 +22,7 @@ class MentalHealthScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text('Mental Health Resources'),
           backgroundColor: Colors.black, // Black AppBar for contrast
+          foregroundColor: Colors.yellow,
         ),
         body: Padding(
           padding: EdgeInsets.all(40.0),
@@ -30,13 +31,13 @@ class MentalHealthScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               _buildActionButton(context, 'Journaling', Icons.book),
-              SizedBox(height: 20.0),
-              _buildActionButton(context, 'Exercises', Icons.fitness_center),
-              SizedBox(height: 20.0),
-              _buildActionButton(context, '...', Icons.help_outline),
-              SizedBox(height: 20.0),
-              _buildActionButton(context, 'idk', Icons.question_answer),
-              SizedBox(height: 20.0),
+              SizedBox(height: 40.0),
+              _buildActionButton(context, 'Tips and Exercises', Icons.fitness_center),
+              SizedBox(height: 40.0),
+              _buildActionButton(context, 'Habit Tracker', Icons.help_outline),
+              SizedBox(height: 40.0),
+              _buildActionButton(context, 'College Application Page', Icons.school),
+              SizedBox(height: 40.0),
               _buildActionButton(context, 'Stress Management', Icons.mood),
             ],
           ),

@@ -10,30 +10,33 @@ class HotlineScreen extends StatelessWidget {
     {'name': 'Crisis Text Line', 'number': 'Text HOME to 741741'},
     {'name': 'National Eating Disorders Association', 'number': '1-800-931-2237'},
     {'name': 'National Sexual Assault Hotline', 'number': '1-800-656-4673'},
-
   ];
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primaryColor: Colors.yellow[800], // Set primary color to yellow
+        primaryColor: Colors.yellow, // Set primary color to a vibrant yellow
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.yellow, // Set color scheme swatch to yellow
+          primarySwatch: Colors.yellow,
         ).copyWith(
           secondary: Colors.black, // Set secondary color to black
         ),
         appBarTheme: AppBarTheme(
-          backgroundColor: Colors.yellow[800], // Set app bar background color to yellow
+          backgroundColor: Colors.black, // Set app bar background color to black
+          titleTextStyle: TextStyle(color: Colors.yellow, fontSize: 19, fontWeight: FontWeight.bold), // Enhanced style for app bar title
         ),
       ),
       home: Scaffold(
         appBar: AppBar(
           title: Text('Emergency Hotlines'),
+          backgroundColor: Colors.black, // Ensure app bar background is black
+          foregroundColor: Colors.yellow, // Ensure app bar text is yellow
         ),
         body: ListView.builder(
           itemCount: hotlines.length,
           itemBuilder: (context, index) {
+            bool isTextLine = hotlines[index]['name'] == 'Crisis Text Line';
             return ListTile(
               title: Text(
                 hotlines[index]['name'] ?? '',
@@ -42,8 +45,6 @@ class HotlineScreen extends StatelessWidget {
                   color: Colors.yellow[800], // Set text color to yellow
                 ),
               ),
-
-
               subtitle: Text(
                 hotlines[index]['number'] ?? '',
                 style: TextStyle(
@@ -51,14 +52,14 @@ class HotlineScreen extends StatelessWidget {
                 ),
               ),
               trailing: IconButton(
-                icon: Icon(Icons.phone),
+                icon: Icon(isTextLine ? Icons.message : Icons.phone), // Conditional icon
                 color: Colors.black, // Set icon color to black
                 onPressed: () {
-                  _callHotline(context, hotlines[index]['number'] ?? '');
+                  _showConfirmationDialog(context, hotlines[index]['number'] ?? '', isTextLine);
                 },
               ),
               onTap: () {
-                _callHotline(context, hotlines[index]['number'] ?? '');
+                _showConfirmationDialog(context, hotlines[index]['number'] ?? '', isTextLine);
               },
             );
           },
@@ -67,14 +68,42 @@ class HotlineScreen extends StatelessWidget {
     );
   }
 
-  void _callHotline(BuildContext context, String number) async {
-    final url = 'tel:$number';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Feature coming soon!!'),
-      ));
-    }
+  void _showConfirmationDialog(BuildContext context, String number, bool isTextLine) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(isTextLine ? "Confirm Text" : "Confirm Call"),
+          content: Text("${isTextLine ? '' : 'Call'} $number?"),
+          actions: <Widget>[
+            TextButton(
+              child: const Text("Cancel"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              style: TextButton.styleFrom(
+                primary: Colors.white, // Text color
+                backgroundColor: Colors.pink[300], // Light pastel red for Cancel
+              ),
+            ),
+            TextButton(
+              child: Text(isTextLine ? "Text" : "Call"),
+              onPressed: () {
+                Navigator.of(context). pop();
+                ScaffoldMessenger.of(context). showSnackBar(
+                  SnackBar(
+                    content: Text('${isTextLine ? "Texting" : "Calling"} feature not enabled yet.'),
+                  ),
+                );
+              },
+              style: TextButton.styleFrom(
+                primary: Colors.white, // Text color
+                backgroundColor: Colors.lightGreen[400], // Light pastel green for Call
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

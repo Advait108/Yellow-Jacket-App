@@ -1,3 +1,4 @@
+//first attempt, works, data stored in code
 
 const express = require('express');
 const bcrypt = require('bcryptjs');
@@ -50,52 +51,46 @@ app.post('/login', async (req, res) => {
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 
+
+//attempt #2, without CRUD
 /*
-const mysql = require('mysql');
+
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const pool = require('./database'); // Assuming database.js is in the same directory
 require('dotenv').config();
 
 const app = express();
-
-
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'Balram510!',
-  database: 'user_auth'
-});
-
-connection.connect(err => {
-  if (err) {
-    console.error('Error connecting to the database: ' + err.stack);
-    return;
-  }
-  console.log('Connected to the database with thread ID: ' + connection.threadId);
-});
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors());
 
 app.post('/login', (req, res) => {
-  const { email, password } = req.body;
-  connection.query('SELECT * FROM users WHERE email = ?', [email], (error, results, fields) => {
-    if (error) {
-      res.status(500).send({ message: "Server error" });
-    }
-    const user = results[0];
-    if (user && password === user.password) {
-      const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '24h' });
-      res.json({ token });
-    } else {
-      res.status(401).send({ message: "Invalid credentials" });
-    }
-  });
+    const { email, password } = req.body;
+
+    pool.query('SELECT * FROM users WHERE email = ?', [email], async (error, results) => {
+        if (error) {
+            return res.status(500).json({ message: "Database query failed" });
+        }
+
+        if (results.length > 0) {
+            const user = results[0];
+
+            const isMatch = await bcrypt.compare(password, user.passwordHash);
+            if (isMatch) {
+                const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '24h' });
+                res.json({ token });
+            } else {
+                res.status(401).json({ message: "Invalid credentials" });
+            }
+        } else {
+            res.status(404).json({ message: "User not found" });
+        }
+    });
 });
 
-
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 */
