@@ -40,7 +40,7 @@ class SchoolResourcesPage extends StatelessWidget {
                 SizedBox(height: 40.0),
                 _buildElevatedButton(context, 'Event Calendar', Icons.calendar_today, () => _showPopup(context, 'Event Calendar')),
                 SizedBox(height: 40.0),
-                _buildElevatedButton(context, 'Office Hours', Icons.access_time, () => _showPopup(context, 'Office Hours')),
+                _buildElevatedButton(context, 'Office Hours [BROKEN]', Icons.access_time, () => _showPopup(context, 'Office Hours')),
                 SizedBox(height: 40.0),
                 _buildElevatedButton(context, 'College Applications', Icons.school, () => _showPopup(context, 'College Applications')),
               ],
